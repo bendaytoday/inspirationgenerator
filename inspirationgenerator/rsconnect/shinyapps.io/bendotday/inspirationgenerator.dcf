@@ -1,0 +1,13 @@
+name: inspirationgenerator
+title: inspirationgenerator
+username:
+account: bendotday
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3621671
+bundleId: 4210763
+url: https://bendotday.shinyapps.io/inspirationgenerator/
+when: 1613060231.56376
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: bookmarks_firefox.html|bookmarks_google.html|inspiration.csv|playingwithHTML.R
