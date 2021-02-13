@@ -74,7 +74,15 @@ ui <- fluidPage(
                                               style = "color: #000; 
                                               background-color: #fff; 
                                               border-color: #7e7e7e;
-                                              font-size: medium;"))
+                                              font-size: medium;")),
+                        tabPanel("new",
+                                 h1(""),
+                                 textInput(inputId = "newlink",
+                                           label = "URL"),
+                                 textInput(inputId = "newname",
+                                           label = "Label"),
+                                 actionButton(inputId = 'add', 
+                                              label = "Add link to list"))
                         )
             ),
 
@@ -146,6 +154,8 @@ server <- function(input, output, session) {
     output$list <- renderUI({getPage()})
     
     observeEvent(input$random, {
+        
+        df <- read.csv('inspiration.csv')
         
         # Case if no upload
         if (is.null(input$file)) {
@@ -248,6 +258,46 @@ server <- function(input, output, session) {
                           selected = "Inspiration")
         
     })
+    
+
+    # Write new URL to list ---------------------------------------------------
+
+    observeEvent(input$add, {
+        
+        if (is.null(input$newlink)) return()
+        else if (!is.null(input$newlink) & (input$newname == '')) {
+            if (input$newlink %in% df$links == TRUE) {
+                showNotification('Duplicate link not added', type = 'error')
+                df <- df %>% distinct(names, links, .keep_all = TRUE)
+                write.csv(df, 'inspiration.csv', row.names = FALSE)
+                return()
+            }
+            else {
+                df <- df %>% add_row(names = 'New link 1', 
+                                     links = paste0(input$newlink))
+                showNotification('Success! Added "New link 1"', type = 'message')
+                write.csv(df, 'inspiration.csv', row.names = FALSE)
+            }
+        }
+        
+        else {
+            if (input$newlink %in% df$links == TRUE) {
+                showNotification('Duplicate link not added', type = 'error')
+                df <- df %>% distinct(names, links, .keep_all = TRUE)
+                write.csv(df, 'inspiration.csv', row.names = FALSE)
+                return()
+            }
+            else {
+                df <- df %>% add_row(names = paste0(input$newname), 
+                                     links = paste0(input$newlink)) %>%
+                    distinct(names, links, .keep_all = TRUE)
+                
+                showNotification('Success!', type = 'message')
+                write.csv(df, 'inspiration.csv', row.names = FALSE)
+            }
+        }
+        
+    })    
     
 }
 
