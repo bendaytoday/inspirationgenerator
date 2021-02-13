@@ -1,7 +1,7 @@
 # This app returns a random link from a list of bookmarks
 # Author: Ben Day
 # Created on: 11/02/2021
-# Modified on: 12/02/2021
+# Modified on: 13/02/2021
 
 library(shiny)
 library(tidyverse)
@@ -93,7 +93,7 @@ ui <- fluidPage(
         mainPanel(
             tabsetPanel(id = 'tabs', 
                         type = 'tabs',
-                        tabPanel("List", htmlOutput(outputId = 'list')),
+                        #tabPanel("List", htmlOutput(outputId = 'list')),
                         tabPanel("Inspiration", 
                             h1(""),
                             # p("Random link", style = "font-size:26px"),
@@ -137,24 +137,24 @@ server <- function(input, output, session) {
         tagList(h6(url))
     })
     
-    # Function to wrangle data
-    getPage <- function() {
-        if (is.null(input$file)) {
-            output$aa <- DT::renderDataTable({
-                df %>% rename("Name" = 1,
-                              "Link" = 2) %>%
-                    select(1, 2) %>%
-                    sample_n(nrow(.))}, 
-                options = list(dom  = '<"top">t<"bottom">',
-                                                                  searching = F,
-                                                                  paging = FALSE
-            ))
-            DT::dataTableOutput("aa")
-            }
-        else return(includeHTML(input$file$datapath))
-    }
-
-    output$list <- renderUI({getPage()})
+    # # Function to wrangle data
+    # getPage <- function() {
+    #     if (is.null(input$file)) {
+    #         output$aa <- DT::renderDataTable({
+    #             df %>% rename("Name" = 1,
+    #                           "Link" = 2) %>%
+    #                 select(1, 2) %>%
+    #                 sample_n(nrow(.))}, 
+    #             options = list(dom  = '<"top">t<"bottom">',
+    #                                                               searching = F,
+    #                                                               paging = FALSE
+    #         ))
+    #         DT::dataTableOutput("aa")
+    #         }
+    #     else return(includeHTML(input$file$datapath))
+    # }
+    # 
+    # output$list <- renderUI({getPage()})
     
     observeEvent(input$random, {
         
