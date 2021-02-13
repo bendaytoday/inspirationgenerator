@@ -28,7 +28,7 @@ ui <- fluidPage(
         sidebarPanel(
             tabsetPanel(id = 'ins', 
                         type = 'tabs',
-                        tabPanel("Many topics",
+                        tabPanel("Home",
                                  h1(""),
                                  actionButton(inputId = 'random',
                                               label = div("Find me a random link",
@@ -42,7 +42,7 @@ ui <- fluidPage(
                                  uiOutput("tab"),
                                  tags$ui
                         ),
-                        tabPanel("Upload my links",
+                        tabPanel("Upload",
                                  h1(""),
                                  h3("Links are not saved!"),
                                  fileInput(inputId = 'file',
@@ -75,14 +75,17 @@ ui <- fluidPage(
                                               background-color: #fff; 
                                               border-color: #7e7e7e;
                                               font-size: medium;")),
-                        tabPanel("new",
+                        tabPanel("New",
                                  h1(""),
                                  textInput(inputId = "newlink",
                                            label = "URL"),
                                  textInput(inputId = "newname",
                                            label = "Label"),
                                  actionButton(inputId = 'add', 
-                                              label = "Add link to list"))
+                                              label = "Add link to list",
+                                              style = "color: #fff; 
+                                              background-color: #337ab7; 
+                                              border-color: #2e6da4;"))
                         )
             ),
 
