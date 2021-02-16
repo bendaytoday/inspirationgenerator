@@ -95,17 +95,26 @@ ui <- fluidPage(
             #             type = 'tabs',
             #             #tabPanel("List", htmlOutput(outputId = 'list')),
             #             tabPanel("Inspiration", 
-                            h1(""),
-                            img(src = 'cartoon.jpeg', width = '100%'),
                             # p("Random link", style = "font-size:26px"),
-                            h1(""),
                             htmlOutput("link", inline = TRUE),
                             tags$head(tags$style("#link{color: red;
                                  font-size: 26px;
                                  font-style: italic;
-                                 }"
-                                                 )
-                                      )
+                                 }")),
+                            br(),
+                            conditionalPanel(condition = "input.random == 0",
+                                             h1(""),
+                                             img(src = 'cartoon.jpeg', 
+                                                 width = '100%')),
+                            conditionalPanel(condition = "input.random > 0",
+                                             h1(""),
+                                             # div(img(src = 'idea.jpg',
+                                             img(src = 'idea.jpg', 
+                                                 width = '50%',
+                                                 align = 'center'),
+                                                 # style = "text-align: center;")
+                                             )
+                            
             #             )
             # )
         )
