@@ -42,14 +42,14 @@ ui <- fluidPage(
                                  uiOutput("tab"),
                                  tags$ui
                         ),
-                        tabPanel("Upload",
-                                 h1(""),
-                                 h3("Links are not saved!"),
-                                 fileInput(inputId = 'file',
-                                           label = "Upload list",
-                                           accept = c('html', 'txt', 'csv')),
-                                 h1("")
-                                 ),
+                        # tabPanel("Upload",
+                        #          h1(""),
+                        #          h3("Links are not saved!"),
+                        #          fileInput(inputId = 'file',
+                        #                    label = "Upload list",
+                        #                    accept = c('html', 'txt', 'csv')),
+                        #          h1("")
+                        #          ),
                         tabPanel("Blogs",
                                  h1(""),
                                  actionButton(inputId = 'fs',
@@ -91,13 +91,14 @@ ui <- fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
-            tabsetPanel(id = 'tabs', 
-                        type = 'tabs',
-                        #tabPanel("List", htmlOutput(outputId = 'list')),
-                        tabPanel("Inspiration", 
+            # tabsetPanel(id = 'tabs', 
+            #             type = 'tabs',
+            #             #tabPanel("List", htmlOutput(outputId = 'list')),
+            #             tabPanel("Inspiration", 
                             h1(""),
+                            img(src = 'cartoon.jpeg', width = '100%'),
                             # p("Random link", style = "font-size:26px"),
-                            # h1(""),
+                            h1(""),
                             htmlOutput("link", inline = TRUE),
                             tags$head(tags$style("#link{color: red;
                                  font-size: 26px;
@@ -105,8 +106,8 @@ ui <- fluidPage(
                                  }"
                                                  )
                                       )
-                        )
-            )
+            #             )
+            # )
         )
     )
 )
