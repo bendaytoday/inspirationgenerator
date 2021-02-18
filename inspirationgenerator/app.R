@@ -1,7 +1,7 @@
 # This app returns a random link from a list of bookmarks
 # Author: Ben Day
 # Created on: 11/02/2021
-# Modified on: 13/02/2021
+# Modified on: 18/02/2021
 
 library(shiny)
 library(tidyverse)
@@ -9,21 +9,25 @@ library(DT)
 library(rvest)
 
 # USER INTERFACE
-ui <- fluidPage(
+ui <- fluidPage(list(
+    tags$head(tags$link(rel = "icon",
+                        href="https://mpng.subpng.com/20191012/foh/transparent-idea-icon-seo-icon-lightbulb-icon-5da1bd4d12a1d0.3939065915708808450763.jpg",
+                        type="image/vnd.microsoft.icon"))),
+    div(style = "padding: 0px 0px; width: '100%'; margin-top:-2em;",
+        titlePanel(windowTitle = "Inspiration Generator",
+                   title = "")),
 
     # Application title
     headerPanel(
         fluidRow(
             div("Inspiration Generator"),
             div(h5("")),
-            div(style = "font-size: 14px; 
-                font-style: italic", 
-                          "Follow the link for random inspiration..."),
-            div(h5(""))),
-        windowTitle = "Inspiration Generator"
+            div(style = "font-size: 14px;
+                font-style: italic",
+                          "Find something to spark inspiration"),
+            div(h5("")))
     ),
 
-    # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
             tabsetPanel(id = 'ins', 
@@ -31,13 +35,12 @@ ui <- fluidPage(
                         tabPanel("Home",
                                  h1(""),
                                  actionButton(inputId = 'random',
-                                              label = div("Find me a random link",
+                                              label = div("Find me something",
                                                           icon('lightbulb')),
                                               style = "color: #fff; 
                                               background-color: #03c04a; 
                                               border-color: #5dbb63;
                                               font-size: medium;"),
-                                 #img(src = "app-ideas.png", height = 30),
                                  h1(""),
                                  uiOutput("tab"),
                                  tags$ui
@@ -121,7 +124,7 @@ ui <- fluidPage(
     )
 )
 
-# Define server logic required to draw a histogram
+# SERVER PROCESSING
 server <- function(input, output, session) {
     
     df <- read.csv('inspiration.csv')
